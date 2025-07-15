@@ -1,94 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Find Your Perfect Shade</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background-color: #fff5f8;
-      color: #5d3a3a;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Perfect Shade!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mystyles.css">
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: url('images/background.png') top center no-repeat;
-      background-size: cover;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
-      color: #b85578;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: #7d4e57;
-      margin: 0 auto;
-      max-width: 90%;
-    }
-
-    .video-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-    }
-
-    .video-box {
-      width: 100%;
-      max-width: 600px;
-      height: 340px;
-      background-color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      color: #944f6b;
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    footer {
-      background: url('images/background.png') bottom center no-repeat;
-      background-size: cover;
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #a88995;
-    }
-
-    @media screen and (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .video-box {
-        height: 200px;
-        font-size: 1rem;
-      }
-    }
-  </style>
 </head>
-<body>
-  <header>
-    <h1>Find Your Perfect Shade</h1>
-    <p>Upload a selfie and discover your closest foundation match from top beauty brands. Glowy, radiant, and oh-so-you.</p>
-  </header>
+<body class="font-nunito">
 
-  <section class="video-section">
-    <div class="video-box">Video coming soon...</div>
-  </section>
 
-  <footer>
-    Made with 💖 for your glow | Coming soon to browsers near you
-  </footer>
-</body>
+
+    <!-- Main Page Container -->
+    <div class="main-container flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        
+        <main class="w-full max-w-lg mx-auto text-center">
+            
+            <!-- Header Text -->
+            <div class="mb-6">
+                <h1 class="font-fredoka text-4xl sm:text-5xl md:text-6xl text-neon">
+ 			 SKIN TONE MATCHING
+		</h1>
+                <p class="font-nunito text-lg sm:text-xl font-semibold mt-2 text-shadow-custom" style="color: #795548;">
+                    Upload a photo to find your perfect foundation shade!
+                </p>
+            </div>
+
+            <!-- Video Player Section -->
+            <div class="video-wrapper rounded-2xl p-2 sm:p-3 w-full mb-8">
+                <div class="video-container rounded-lg overflow-hidden">
+                    <!-- Replace this with your actual video embed code -->
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRLpNh_d6kU_c_So9iB1" 
+                        title="Beauty Tutorial Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Call to Action Button -->
+            <div>
+                <button id="uploadButton" class="btn-primary font-fredoka text-xl sm:text-2xl py-4 px-10 rounded-full shadow-lg">
+                    Find My Shade!
+                </button>
+                <!-- Hidden file input that gets triggered by the button -->
+                <input type="file" id="fileInput" class="hidden" accept="image/*">
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal for feedback after upload -->
+    <div id="feedbackModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-sm w-full font-nunito">
+            <div id="modal-icon" class="mb-4">
+                <!-- Icon will be injected here by JS -->
+            </div>
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-2"></h2>
+            <p id="modal-message" class="text-gray-600"></p>
+            <button id="closeModalButton" class="mt-6 bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">
+                Close
+            </button>
+        </div>
+    </div>
+<script src="script.js"></script>
+    </body>
 </html>

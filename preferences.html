@@ -1,0 +1,45 @@
+<!-- preferences.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Preferences – GlowMatch</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="form-section">
+      <h2>Tell us more</h2>
+      <form action="results.html">
+        <label>Choose your country:
+          <select name="country">
+            <option>USA</option>
+            <option>India</option>
+            <option>UK</option>
+            <option>Singapore</option>
+          </select>
+        </label>
+
+        <label>Select 5 brands:
+          <select name="brands" multiple>
+            <option>Tirtir</option>
+            <option>Maybelline</option>
+            <option>Dior</option>
+            <option>Lakme</option>
+            <option>L'Oréal</option>
+            <option>Rare Beauty</option>
+          </select>
+        </label>
+
+        <button type="submit" class="button">Get My Match</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="scripts/load-partials.js"></script>
+</body>
+</html>
