@@ -3,35 +3,410 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Upload Your Photo – GlowMatch</title>
-  <link rel="stylesheet" href="styles/main.css" />
+  <title>Upload Your Photo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+   <style>
+ .font-fredoka {
+            font-family: 'Fredoka One', cursive;
+        }
+
+.text-neon {
+  color: #fff;
+  animation: neonPulse 1.8s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff6ec7,
+    0 0 20px #ff6ec7,
+    0 0 40px #ff6ec7;
+}
+
+@keyframes neonPulse {
+  0% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #ff6ec7,
+      0 0 20px #ff6ec7,
+      0 0 40px #ff6ec7;
+  }
+
+  100% {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #ff6ec7,
+      0 0 30px #ff6ec7,
+      0 0 60px #ff6ec7;
+  }
+
+   </style>
+
 </head>
-<body>
-  <div id="header-placeholder"></div>
+<body class="bg-gradient-to-b from-[#B2E8FC] to-[#FDF7D3] font-nunito text-gray-800">
 
-  <main>
-    <section class="upload-section">
-      <h2>Photo Guidelines</h2>
+  <!-- HEADER -->
+  <header class="text-center py-6">
+    <h1 class="font-fredoka text-2xl sm:text-5xl md:text-6xl text-neon">
+      PHOTO INSTRUCTIONS
+    </h1>
+    <p class="mt-2 text-lg sm:text-xl font-medium">
+      Upload a headshot under clear light
+    </p>
+  </header>
+
+  <!-- EXAMPLES -->
+  <section class="max-w-4xl mx-auto p-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+    <!-- Sample Box -->
+    <div>
+      <img src="images/lowlight.png" class="rounded-lg border-4 border-red-300" />
+      <p class="mt-1 text-red-600">Low light or shadows</p>
+    </div>
+    <div>
+      <img src="images/makeup.png" class="rounded-lg border-4 border-red-300" />
+      <p class="mt-1 text-red-600">Make up or filter<p>
+    </div>
+    <div>
+      <img src="images/harshlight.png" class="rounded-lg border-4 border-red-300" />
+      <p class="mt-1 text-red-600">Under direct sunlight</p>
+    </div>
+    <div>
+      <img src="images/normal.png" class="rounded-lg border-4 border-green-400" />
+      <p class="mt-1 text-green-600 font-bold">Natural light is best</p>
+    </div>
+  </section>
+
+
+  <!-- UPLOAD SECTION -->
+<section class="text-center my-10">
+  <div class="inline-block bg-white border-4 border-pink-300 rounded-2xl p-6 shadow-lg">
+    <h2 class="text-pink-600 font-bold text-xl mb-4">Choose a clear photo</h2>
+
+    <div class="relative text-center">
+<div class="flex flex-col items-center">
+  <label
+    for="photoInput"
+    class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-full cursor-pointer shadow-md transition"
+  >
+    Choose File
+  </label>
+  <input id="photoInput" type="file" accept="image/*" class="hidden" />
+</div>
+
+
+
+
+  <div id="fileInfo" class="mt-4 flex items-center justify-center gap-2 text-sm text-gray-700 hidden">
+    <span id="fileName" class="truncate max-w-xs"></span>
+    <button id="removeFile" class="text-red-500 font-bold text-lg hover:text-red-700" title="Remove file">✖</button>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- Mandatory Input Section -->
+<section class="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-xl shadow-md border-4 border-pink-200">
+  <!-- Foundation Brand Selection -->
+  <div class="mb-6">
+    <h3 class="font-semibold mb-2">Choose foundation brands for analysis (select up to 5):</h3>
+    <p class="text-sm text-gray-500 mb-4">Tip: Select the brands you use or are interested in.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-64 overflow-y-auto">
+     <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="TIRTIR Mask Fit Red Cushion" class="accent-pink-500">
+      <span>TIRTIR Mask Fit Red Cushion</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Clio Kill Cover" class="accent-pink-500">
+      <span>Clio Kill Cover</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Etude Double Lasting" class="accent-pink-500">
+      <span>Etude Double Lasting</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Fenty Pro Filt’r" class="accent-pink-500">
+      <span>Fenty Pro Filt’r</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Estée Lauder Double Wear" class="accent-pink-500">
+      <span>Estée Lauder Double Wear</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Maybelline Fit Me" class="accent-pink-500">
+      <span>Maybelline Fit Me</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="MAC Studio Fix" class="accent-pink-500">
+      <span>MAC Studio Fix</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Rare Beauty Liquid Touch" class="accent-pink-500">
+      <span>Rare Beauty Liquid Touch</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="NARS Natural Radiant" class="accent-pink-500">
+      <span>NARS Natural Radiant</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Shiseido Synchro Skin" class="accent-pink-500">
+      <span>Shiseido Synchro Skin</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Dior Forever Skin Glow" class="accent-pink-500">
+      <span>Dior Forever Skin Glow</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Hera Black Cushion" class="accent-pink-500">
+      <span>Hera Black Cushion</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Romand Bare Water Cushion" class="accent-pink-500">
+      <span>Rom&nd Bare Water Cushion</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Lancome Teint Idole Ultra" class="accent-pink-500">
+      <span>Lancome Teint Idole Ultra</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="Innisfree Matte Cushion" class="accent-pink-500">
+      <span>Innisfree Matte Cushion</span>
+    </label>
+    <label class="flex items-center space-x-2">
+      <input type="checkbox" name="brands" value="YSL All Hours" class="accent-pink-500">
+      <span>YSL All Hours</span>
+    </label>
+    </div>
+    <p class="text-xs text-gray-500 mt-3">Only the first 5 selected will be used if more are checked.</p>
+  </div>
+
+  <!-- Country Dropdown -->
+  <div class="mb-2">
+    <label for="country" class="block font-semibold mb-1">Where are you located?</label>
+    <select id="country" name="country" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm">
+      <option value="">Select a country</option>
+      <option value="US">United States</option>
+      <option value="KR">South Korea</option>
+      <option value="JP">Japan</option>
+      <option value="IN">India</option>
+      <option value="UK">United Kingdom</option>
+      <option value="AU">Australia</option>
+      <option value="CA">Canada</option>
+      <option value="PH">Philippines</option>
+      <option value="TH">Thailand</option>
+      <option value="MY">Malaysia</option>
+      <option value="SG">Singapore</option>
+      <option value="ID">Indonesia</option>
+      <!-- Add more as needed -->
+    </select>
+  </div>
+</section>
+
+
+
+  <!-- ACCORDION SECTION with heading and border -->
+<section class="max-w-2xl mx-auto my-12 p-6 border-4 border-yellow-200 rounded-xl bg-white shadow-lg">
+
+ <h2 class="text-lg font-semibold text-gray-700 mb-4">Read this before submitting your photo:</h2>
+  <p class="mt-2 text-gray-600">The questions below are not mandatory, but with more data our analysis can be of better quality.</p>
+  <p class="mt-2 text-gray-600">Leave them blank if you are not sure. We understand how confusing make-up can be!</p>
+
+
+  <!-- Optional Question: Jewelry Preference -->
+<details class="bg-gray-50 rounded-lg p-4 shadow-sm mb-3">
+  <summary class="font-semibold cursor-pointer">Which jewellery looks better on you?</summary>
+  <div class="mt-3 space-y-2">
+    <label class="inline-flex items-center">
+      <input type="checkbox" name="jewelry" value="silver" class="mr-2">
+      Silver
+    </label>
+    <br>
+    <label class="inline-flex items-center">
+      <input type="checkbox" name="jewelry" value="gold" class="mr-2">
+      Gold
+    </label>
+    <br>
+    <label class="inline-flex items-center">
+      <input type="checkbox" name="jewelry" value="rose_gold" class="mr-2">
+      Light gold / Rose gold
+    </label>
+  </div>
+</details>
+
+<!-- Optional Question: Foundation that suits you -->
+<details class="bg-gray-50 rounded-lg p-4 shadow-sm">
+  <summary class="font-semibold cursor-pointer">Any brand foundation that you think suits you?</summary>
+  <div class="mt-3">
+    <textarea
+      name="fav_foundation"
+      placeholder="Write the brand & product name if any (e.g. Fenty 180, Tirtir red cushion etc)"
+      class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm resize-none shadow-sm"
+      rows="3"
+    ></textarea>
+  </div>
+</details>
+
+</section>
+
+<!-- Confidence Score Progress -->
+<section class="max-w-xl mx-auto my-10 px-6">
+  <label for="confidenceProgress" class="block mb-2 text-sm font-semibold text-gray-700">Confidence Score</label>
+  <div class="relative w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-sm">
+    <div id="progressBar" class="bg-green-400 h-4 rounded-full transition-all duration-300" style="width: 0%;"></div>
+  </div>
+  <p id="feedbackText" class="text-sm text-gray-600 mt-2">Please upload a photo to begin.</p>
+</section>
+
+
+
+<!-- FINAL CTA -->
+<section class="text-center mb-12">
+  <a href="results.html"
+     class="inline-block bg-pink-500 hover:bg-pink-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200">
+    Find My Result
+  </a>
+</section>
+
+
+
+<!--FOOTER -->
+<footer class="bg-transparent text-gray-700 mt-12">
+  <div class="backdrop-blur-sm bg-white/60 rounded-t-2xl max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm shadow-inner">
+    <!-- Disclaimer -->
+    <div>
+      <h3 class="font-bold mb-2">Privacy & Data</h3>
+      <p>We don’t store your uploaded photos. Your photo is deleted when you close the browser</p>
+    </div>
+
+    <!-- Social Media -->
+    <div>
+      <h3 class="font-bold mb-2">Follow Us</h3>
+      <div class="flex space-x-4">
+        <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
+          <img src="images/icon-instagram.svg" alt="Instagram" class="w-6 h-6 hover:opacity-75">
+        </a>
+        <a href="https://tiktok.com/@yourpage" target="_blank" aria-label="TikTok">
+          <img src="images/icon-tiktok.svg" alt="TikTok" class="w-6 h-6 hover:opacity-75">
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 class="font-bold mb-2">Get in Touch</h3>
       <ul>
-        <li>Face the camera, neutral expression</li>
-        <li>Soft, even lighting (no harsh light or shadow)</li>
-        <li>No makeup preferred</li>
-        <li>Neck must be visible</li>
+        <li><a href="mailto:hello@example.com" class="hover:underline">hello@example.com</a></li>
+        <li><a href="#" class="hover:underline">Contact Form</a></li>
       </ul>
+    </div>
 
-      <div class="sample-images">
-        <img src="images/sample-good.jpg" alt="Good Example">
-        <img src="images/sample-bad.jpg" alt="Bad Example">
-      </div>
+    <!-- API Embed -->
+    <div>
+      <h3 class="font-bold mb-2">Use Our API</h3>
+      <p>Integrate our shade matcher on your blog or e-commerce store.</p>
+      <a href="#" class="text-pink-500 font-semibold hover:underline mt-2 inline-block">Embed Now →</a>
+    </div>
+  </div>
 
-      <div class="upload-box">
-        <input type="file" accept="image/*">
-        <a href="preferences.html" class="button">Next</a>
-      </div>
-    </section>
-  </main>
+  <div class="text-center text-xs text-gray-500 py-4 border-t border-pink-100">
+    © 2025 Your Brand. All rights reserved.
+  </div>
+</footer>
 
-  <div id="footer-placeholder"></div>
-  <script src="scripts/load-partials.js"></script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkboxes = document.querySelectorAll('input[name="brands"]');
+    const fileInput = document.querySelector('input[type="file"]');
+    const ctaButton = document.querySelector('button.bg-pink-500');
+    const maxSelection = 5;
+    const fileInfo = document.getElementById('fileInfo');
+    const fileNameSpan = document.getElementById('fileName');
+    const removeBtn = document.getElementById('removeFile');
+
+
+const updateConfidenceScore = () => {
+  let score = 0;
+
+  if (fileInput.files.length > 0) score += 60;
+
+  const jewelryAnswered = document.querySelectorAll('input[name="jewelry"]:checked').length > 0;
+  if (jewelryAnswered) score += 10;
+
+  const foundationText = document.querySelector('textarea[name="fav_foundation"]').value.trim();
+  if (foundationText.length > 0) score += 10;
+
+  const countrySelected = document.getElementById("country").value !== "";
+  if (countrySelected) score += 20;
+
+  const bar = document.getElementById("progressBar");
+  bar.style.width = `${score}%`;
+
+  // Dynamic bar color (optional)
+  if (score < 40) bar.className = "bg-red-400 h-4 rounded-full";
+  else if (score < 70) bar.className = "bg-yellow-400 h-4 rounded-full";
+  else bar.className = "bg-green-400 h-4 rounded-full";
+
+  document.getElementById("feedbackText").textContent =
+    score === 0
+      ? "Please upload a photo to begin."
+      : score < 70
+      ? "We need more details for better matching."
+      : score < 100
+      ? "Looking good! A bit more info helps."
+      : "Excellent! You're all set for great results.";
+};
+
+
+
+    const validateForm = () => {
+      const fileSelected = fileInput.files.length > 0;
+      const brandsSelected = Array.from(checkboxes).some(cb => cb.checked);
+
+      ctaButton.disabled = !(fileSelected && brandsSelected);
+      ctaButton.classList.toggle('opacity-50', ctaButton.disabled);
+      ctaButton.classList.toggle('cursor-not-allowed', ctaButton.disabled);
+    };
+
+  // Watch checkbox selections
+    checkboxes.forEach(cb => cb.addEventListener("change", validateForm));
+
+    // Show filename when uploaded
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files.length > 0) {
+        fileNameSpan.textContent = fileInput.files[0].name;
+        fileInfo.classList.remove("hidden");
+      } else {
+        fileInfo.classList.add("hidden");
+      }
+      validateForm();
+    });
+
+    // Clear file input
+    removeBtn.addEventListener("click", () => {
+      fileInput.value = "";
+      fileInfo.classList.add("hidden");
+      validateForm();
+    });
+
+    // Initially disable CTA
+    validateForm();
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("change", () => {
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+
+        if (checked.length >= maxSelection) {
+          checkboxes.forEach(cb => {
+            if (!cb.checked) cb.disabled = true;
+          });
+        } else {
+          checkboxes.forEach(cb => cb.disabled = false);
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
