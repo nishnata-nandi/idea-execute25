@@ -45,6 +45,8 @@ body {
     background-repeat: no-repeat;
     background-position: center top;
 }
+
+
 /* Tablet (768px to 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
     .main-container {
@@ -56,9 +58,9 @@ body {
 @media (max-width: 767px) {
     .main-container {
         background-image: url('images/background_mobile.png');
-        padding-top: 4rem; /* slightly less space */
+        padding-top: 2rem; /* reduced from 4rem */
+        padding-bottom: 1rem; /* add this line to reduce spacing below */
     }
-
 }
 
         /* Custom text shadow for readability */
@@ -175,7 +177,7 @@ body {
             </div>
 
             <!-- Call to Action Button -->
-            <div>
+            <div >
   <a href="upload.html" class="btn-primary font-fredoka text-xl sm:text-2xl py-4 px-10 rounded-full shadow-lg inline-block">
     Find My Shade!
   </a>
@@ -184,23 +186,10 @@ body {
         </main>
     </div>
 
-    <!-- Modal for feedback after upload -->
-    <div id="feedbackModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
-        <div class="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-sm w-full font-nunito">
-            <div id="modal-icon" class="mb-4">
-                <!-- Icon will be injected here by JS -->
-            </div>
-            <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-2"></h2>
-            <p id="modal-message" class="text-gray-600"></p>
-            <button id="closeModalButton" class="mt-6 bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">
-                Close
-            </button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+   <script src="script.js"></script>
 
 <!--FOOTER -->
-<footer class="bg-transparent text-gray-700 mt-12">
+<footer class="bg-transparent text-gray-700 mt-5">
   <div class="backdrop-blur-sm bg-white/60 rounded-t-2xl max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm shadow-inner">
     <!-- Disclaimer -->
     <div>
