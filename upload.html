@@ -211,26 +211,27 @@
   <p class="mt-2 text-gray-600">Leave them blank if you are not sure. We understand how confusing make-up can be!</p>
 
 
-  <!-- Optional Question: Jewelry Preference -->
+<!-- Optional Question: Jewelry Preference -->
 <details class="bg-gray-50 rounded-lg p-4 shadow-sm mb-3">
   <summary class="font-semibold cursor-pointer">Which jewellery looks better on you?</summary>
   <div class="mt-3 space-y-2">
     <label class="inline-flex items-center">
-      <input type="checkbox" name="jewelry" value="silver" class="mr-2">
+      <input type="checkbox" name="jewelry" value="silver" class="mr-2 accent-pink-500">
       Silver
     </label>
     <br>
     <label class="inline-flex items-center">
-      <input type="checkbox" name="jewelry" value="gold" class="mr-2">
+      <input type="checkbox" name="jewelry" value="gold" class="mr-2 accent-pink-500">
       Gold
     </label>
     <br>
     <label class="inline-flex items-center">
-      <input type="checkbox" name="jewelry" value="rose_gold" class="mr-2">
+      <input type="checkbox" name="jewelry" value="rose_gold" class="mr-2 accent-pink-500">
       Light gold / Rose gold
     </label>
   </div>
 </details>
+
 
 <!-- Optional Question: Foundation that suits you -->
 <details class="bg-gray-50 rounded-lg p-4 shadow-sm">
@@ -249,27 +250,42 @@
 
 <!-- Confidence Score Progress -->
 <section class="max-w-xl mx-auto my-10 px-6">
-  <label for="confidenceProgress" class="block mb-2 text-sm font-semibold text-gray-700">Confidence Score</label>
+  <label for="confidenceProgress" class="block mb-2 text-sm font-semibold text-gray-700">
+    Confidence Score
+    <span id="scoreValue" class="ml-2 font-bold text-pink-600">0%</span>
+  </label>
+
   <div class="relative w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-sm">
     <div id="progressBar" class="bg-green-400 h-4 rounded-full transition-all duration-300" style="width: 0%;"></div>
   </div>
+
   <p id="feedbackText" class="text-sm text-gray-600 mt-2">Please upload a photo to begin.</p>
+
+  <div id="instructionBox" class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-300 text-yellow-800 rounded-lg text-sm hidden">
+    <p><strong>Tips:</strong></p>
+    <ul class="list-disc list-inside">
+      <li>Upload a clear photo under natural light</li>
+      <li>Select the foundation brands you use</li>
+      <li>Answer optional questions for better accuracy</li>
+    </ul>
+  </div>
 </section>
+
 
 
 
 <!-- FINAL CTA -->
 <section class="text-center mb-12">
-  <a href="results.html"
-     class="inline-block bg-pink-500 hover:bg-pink-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200">
+  <button id="ctaButton" disabled class="bg-pink-500 hover:bg-pink-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-200" >
     Find My Result
-  </a>
+  </button>
 </section>
 
 
 
+
 <!--FOOTER -->
-<footer class="bg-transparent text-gray-700 mt-12">
+<footer class="bg-transparent text-gray-700 mt-5">
   <div class="backdrop-blur-sm bg-white/60 rounded-t-2xl max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm shadow-inner">
     <!-- Disclaimer -->
     <div>
@@ -287,6 +303,7 @@
         <a href="https://tiktok.com/@yourpage" target="_blank" aria-label="TikTok">
           <img src="images/icon-tiktok.svg" alt="TikTok" class="w-6 h-6 hover:opacity-75">
         </a>
+       <p>We are two women who love code and fashion!</p>
       </div>
     </div>
 
@@ -314,64 +331,86 @@
 
 
 
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const checkboxes = document.querySelectorAll('input[name="brands"]');
     const fileInput = document.querySelector('input[type="file"]');
-    const ctaButton = document.querySelector('button.bg-pink-500');
+    const ctaButton = document.getElementById('ctaButton');
     const maxSelection = 5;
     const fileInfo = document.getElementById('fileInfo');
     const fileNameSpan = document.getElementById('fileName');
     const removeBtn = document.getElementById('removeFile');
 
 
-const updateConfidenceScore = () => {
+//confidence score section
+   const updateConfidenceScore = () => {
   let score = 0;
 
   if (fileInput.files.length > 0) score += 60;
-
-  const jewelryAnswered = document.querySelectorAll('input[name="jewelry"]:checked').length > 0;
-  if (jewelryAnswered) score += 10;
-
-  const foundationText = document.querySelector('textarea[name="fav_foundation"]').value.trim();
-  if (foundationText.length > 0) score += 10;
-
-  const countrySelected = document.getElementById("country").value !== "";
-  if (countrySelected) score += 20;
+  if (document.querySelectorAll('input[name="jewelry"]:checked').length > 0) score += 10;
+  if (document.querySelector('textarea[name="fav_foundation"]').value.trim().length > 0) score += 10;
+  if (document.getElementById("country").value !== "") score += 20;
 
   const bar = document.getElementById("progressBar");
-  bar.style.width = `${score}%`;
+  const scoreValue = document.getElementById("scoreValue");
+  const feedbackText = document.getElementById("feedbackText");
+  const instructionBox = document.getElementById("instructionBox");
 
-  // Dynamic bar color (optional)
+  // Update visual score
+  bar.style.width = `${score}%`;
+  scoreValue.textContent = `${score}%`;
+
+  // Bar color
   if (score < 40) bar.className = "bg-red-400 h-4 rounded-full";
   else if (score < 70) bar.className = "bg-yellow-400 h-4 rounded-full";
   else bar.className = "bg-green-400 h-4 rounded-full";
 
-  document.getElementById("feedbackText").textContent =
-    score === 0
-      ? "Please upload a photo to begin."
-      : score < 70
-      ? "We need more details for better matching."
-      : score < 100
-      ? "Looking good! A bit more info helps."
-      : "Excellent! You're all set for great results.";
+  // Feedback message
+  if (score === 0) {
+    feedbackText.textContent = "Please upload a photo to begin.";
+    instructionBox.classList.remove("hidden");
+  } else if (score < 70) {
+    feedbackText.textContent = "We need more details for better matching.";
+    instructionBox.classList.remove("hidden");
+  } else if (score < 100) {
+    feedbackText.textContent = "Looking good! A bit more info helps.";
+    instructionBox.classList.remove("hidden");
+  } else {
+    feedbackText.textContent = "Excellent! You're all set for great results.";
+    instructionBox.classList.add("hidden"); // hide once it's perfect
+  }
 };
-
 
 
     const validateForm = () => {
       const fileSelected = fileInput.files.length > 0;
       const brandsSelected = Array.from(checkboxes).some(cb => cb.checked);
 
-      ctaButton.disabled = !(fileSelected && brandsSelected);
-      ctaButton.classList.toggle('opacity-50', ctaButton.disabled);
-      ctaButton.classList.toggle('cursor-not-allowed', ctaButton.disabled);
+      const isEnabled = fileSelected && brandsSelected;
+      ctaButton.disabled = !isEnabled;
+      ctaButton.classList.toggle('opacity-50', !isEnabled);
+      ctaButton.classList.toggle('cursor-not-allowed', !isEnabled);
     };
 
-  // Watch checkbox selections
-    checkboxes.forEach(cb => cb.addEventListener("change", validateForm));
+    // Handle brand checkbox selection + max limit
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        validateForm();
+        updateConfidenceScore();
 
-    // Show filename when uploaded
+        const checked = Array.from(checkboxes).filter(c => c.checked);
+        if (checked.length >= maxSelection) {
+          checkboxes.forEach(c => {
+            if (!c.checked) c.disabled = true;
+          });
+        } else {
+          checkboxes.forEach(c => c.disabled = false);
+        }
+      });
+    });
+
+    // File input handler
     fileInput.addEventListener("change", () => {
       if (fileInput.files.length > 0) {
         fileNameSpan.textContent = fileInput.files[0].name;
@@ -380,31 +419,34 @@ const updateConfidenceScore = () => {
         fileInfo.classList.add("hidden");
       }
       validateForm();
+      updateConfidenceScore();
     });
 
-    // Clear file input
+    // Remove file handler
     removeBtn.addEventListener("click", () => {
       fileInput.value = "";
       fileInfo.classList.add("hidden");
       validateForm();
+      updateConfidenceScore();
     });
 
-    // Initially disable CTA
+    // Additional input listeners for score
+    document.querySelectorAll('input[name="jewelry"]').forEach(input =>
+      input.addEventListener("change", updateConfidenceScore)
+    );
+    document.querySelector('textarea[name="fav_foundation"]').addEventListener("input", updateConfidenceScore);
+    document.getElementById("country").addEventListener("change", updateConfidenceScore);
+
+    // Redirect CTA
+    ctaButton.addEventListener('click', () => {
+      if (!ctaButton.disabled) {
+        window.location.href = 'results.html';
+      }
+    });
+
+    // Init
     validateForm();
-
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener("change", () => {
-        const checked = Array.from(checkboxes).filter(cb => cb.checked);
-
-        if (checked.length >= maxSelection) {
-          checkboxes.forEach(cb => {
-            if (!cb.checked) cb.disabled = true;
-          });
-        } else {
-          checkboxes.forEach(cb => cb.disabled = false);
-        }
-      });
-    });
+    updateConfidenceScore();
   });
 </script>
 
