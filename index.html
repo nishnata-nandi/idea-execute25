@@ -178,60 +178,26 @@ body {
 
             <!-- Call to Action Button -->
             <div >
-  <a href="upload.html" class="btn-primary font-fredoka text-xl sm:text-2xl py-4 px-10 rounded-full shadow-lg inline-block">
-    Find My Shade!
-  </a>
-</div>
+ 	 <a href="upload.html" class="btn-primary font-fredoka text-xl sm:text-2xl py-4 px-10 rounded-full shadow-lg inline-block">
+ 		   Find My Shade!
+	  </a>
+	</div>
 
         </main>
     </div>
 
-   <script src="script.js"></script>
 
 <!--FOOTER -->
-<footer class="bg-transparent text-gray-700 mt-5">
-  <div class="backdrop-blur-sm bg-white/60 rounded-t-2xl max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm shadow-inner">
-    <!-- Disclaimer -->
-    <div>
-      <h3 class="font-bold mb-2">Privacy & Data</h3>
-      <p>We don’t store your uploaded photos. Your photo is deleted when you close the browser</p>
-    </div>
+<div id="footer-placeholder"></div>
 
-    <!-- Social Media -->
-    <div>
-      <h3 class="font-bold mb-2">Follow Us</h3>
-      <div class="flex space-x-4">
-        <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
-          <img src="images/icon-instagram.svg" alt="Instagram" class="w-6 h-6 hover:opacity-75">
-        </a>
-        <a href="https://tiktok.com/@yourpage" target="_blank" aria-label="TikTok">
-          <img src="images/icon-tiktok.svg" alt="TikTok" class="w-6 h-6 hover:opacity-75">
-        </a>
-       <p>We are two women who love code and fashion!</p>
-      </div>
-    </div>
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+</script>
 
-    <!-- Contact -->
-    <div>
-      <h3 class="font-bold mb-2">Get in Touch</h3>
-      <ul>
-        <li><a href="mailto:hello@example.com" class="hover:underline">hello@example.com</a></li>
-        <li><a href="#" class="hover:underline">Contact Form</a></li>
-      </ul>
-    </div>
-
-    <!-- API Embed -->
-    <div>
-      <h3 class="font-bold mb-2">Use Our API</h3>
-      <p>Integrate our shade matcher on your blog or e-commerce store.</p>
-      <a href="#" class="text-pink-500 font-semibold hover:underline mt-2 inline-block">Embed Now →</a>
-    </div>
-  </div>
-
-  <div class="text-center text-xs text-gray-500 py-4 border-t border-pink-100">
-    © 2025 Your Brand. All rights reserved.
-  </div>
-</footer>
 
     </body>
 </html>
