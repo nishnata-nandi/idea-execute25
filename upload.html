@@ -262,13 +262,9 @@
   <p id="feedbackText" class="text-sm text-gray-600 mt-2">Please upload a photo to begin.</p>
 
   <div id="instructionBox" class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-300 text-yellow-800 rounded-lg text-sm hidden">
-    <p><strong>Tips:</strong></p>
-    <ul class="list-disc list-inside">
-      <li>Upload a clear photo under natural light</li>
-      <li>Select the foundation brands you use</li>
-      <li>Answer optional questions for better accuracy</li>
-    </ul>
-  </div>
+  <!-- Dynamic tips go here -->
+</div>
+
 </section>
 
 
@@ -344,43 +340,65 @@
 
 
 //confidence score section
-   const updateConfidenceScore = () => {
+  const updateConfidenceScore = () => {
   let score = 0;
+  const tips = [];
 
-  if (fileInput.files.length > 0) score += 60;
-  if (document.querySelectorAll('input[name="jewelry"]:checked').length > 0) score += 10;
-  if (document.querySelector('textarea[name="fav_foundation"]').value.trim().length > 0) score += 10;
-  if (document.getElementById("country").value !== "") score += 20;
+  const fileSelected = fileInput.files.length > 0;
+  const jewelryChecked = document.querySelectorAll('input[name="jewelry"]:checked').length > 0;
+  const foundationText = document.querySelector('textarea[name="fav_foundation"]').value.trim();
+  const countrySelected = document.getElementById("country").value !== "";
 
+  if (fileSelected) score += 60;
+  else tips.push("Upload a clear photo under natural light");
+
+  if (jewelryChecked) score += 10;
+  else tips.push("Tell us which jewellery suits you better (Silver/Gold)");
+
+  if (foundationText.length > 0) score += 10;
+  else tips.push("Mention any foundation brand that suits you");
+
+  if (countrySelected) score += 20;
+  else tips.push("Select your country for better regional match");
+
+  // Update progress bar
   const bar = document.getElementById("progressBar");
-  const scoreValue = document.getElementById("scoreValue");
-  const feedbackText = document.getElementById("feedbackText");
-  const instructionBox = document.getElementById("instructionBox");
-
-  // Update visual score
   bar.style.width = `${score}%`;
-  scoreValue.textContent = `${score}%`;
 
-  // Bar color
   if (score < 40) bar.className = "bg-red-400 h-4 rounded-full";
   else if (score < 70) bar.className = "bg-yellow-400 h-4 rounded-full";
   else bar.className = "bg-green-400 h-4 rounded-full";
 
+  // Score text
+  document.getElementById("scoreValue").textContent = `${score}%`;
+
   // Feedback message
-  if (score === 0) {
-    feedbackText.textContent = "Please upload a photo to begin.";
-    instructionBox.classList.remove("hidden");
-  } else if (score < 70) {
-    feedbackText.textContent = "We need more details for better matching.";
-    instructionBox.classList.remove("hidden");
-  } else if (score < 100) {
-    feedbackText.textContent = "Looking good! A bit more info helps.";
+  const feedbackText = document.getElementById("feedbackText");
+  feedbackText.textContent =
+    score === 0
+      ? "Please upload a photo to begin."
+      : score < 70
+      ? "We need more details for better matching."
+      : score < 100
+      ? "Looking good! A bit more info helps."
+      : "Excellent! You're all set for great results.";
+
+  // Update instruction tips
+  const instructionBox = document.getElementById("instructionBox");
+  if (tips.length && score < 100) {
+    instructionBox.innerHTML = `
+      <p class="font-semibold mb-2">To improve your confidence score:</p>
+      <ul class="list-disc list-inside space-y-1">
+        ${tips.map(t => `<li>${t}</li>`).join('')}
+      </ul>
+    `;
     instructionBox.classList.remove("hidden");
   } else {
-    feedbackText.textContent = "Excellent! You're all set for great results.";
-    instructionBox.classList.add("hidden"); // hide once it's perfect
+    instructionBox.classList.add("hidden");
+    instructionBox.innerHTML = "";
   }
 };
+
 
 
     const validateForm = () => {
